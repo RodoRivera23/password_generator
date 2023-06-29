@@ -31,10 +31,10 @@ function generatePassword() {
     if (passLenght < 8 || passLenght >= 128 || !passLenght) {
         alert("Password lenght should be 8 characters at least and no longer than 128 characters");
     } else {
-        lowercase = confirm("Password should incluide lower case letters?");
-        uppercase = confirm("Password should incluide upper case letters?")
-        numbers = confirm("Password should incluide numbers?")
-        specialChars = confirm("Password should incluide special characters?")
+        lowercase = confirm("Password should include lower case letters?");
+        uppercase = confirm("Password should include upper case letters?")
+        numbers = confirm("Password should include numbers?")
+        specialChars = confirm("Password should include special characters?")
     }
 
     if (lowercase) {
