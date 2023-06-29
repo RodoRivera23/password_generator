@@ -28,7 +28,7 @@ function generatePassword() {
     var uppercase;
 
     //validates lenght should be larger than 8 and less than 128 characters, also validates if user input is not a number
-    if (passLenght < 8 || passLenght > 128 || !passLenght) {
+    if (passLenght < 8 || passLenght >= 128 || !passLenght) {
         alert("Password lenght should be 8 characters at least and no longer than 128 characters");
     } else {
         lowercase = confirm("Password should incluide lower case letters?");
