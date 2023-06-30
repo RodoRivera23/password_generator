@@ -28,59 +28,66 @@ function generatePassword() {
     var uppercase;
 
     //validates lenght should be larger than 8 and less than 128 characters, also validates if user input is not a number
-    if (passLenght < 8 || passLenght >= 128 || !passLenght) {
+    if (isNaN(passLenght)) {
+
+        alert("Should be a numeric number only");
+        return newPassword;
+
+    } else if (passLenght < 8 || passLenght >= 128 || !passLenght) {
+
         alert("Password lenght should be 8 characters at least and no longer than 128 characters");
+        return newPassword;
+
     } else {
+
         lowercase = confirm("Password should include lower case letters?");
         uppercase = confirm("Password should include upper case letters?")
         numbers = confirm("Password should include numbers?")
         specialChars = confirm("Password should include special characters?")
+
+        if (lowercase) {
+            //add the lowercase options to the string
+            passOptions += options.lowerCase;
+            //insert a random character from the lowecase options to the chosen characters array
+            chosenChars.push(SelectRandomChar(options.lowerCase));
+        }
+
+        if (uppercase) {
+            //add the upper case options to the string
+            passOptions += options.upperCase;
+            //insert a random character from the uppercase options to the chosen characters array
+            chosenChars.push(SelectRandomChar(options.upperCase));
+        }
+
+        if (numbers) {
+            //add the numbers options to the string
+            passOptions += options.numbers;
+            //insert a random number to the chosen characters array
+            chosenChars.push(SelectRandomChar(options.numbers));
+        }
+
+        if (specialChars) {
+            //add the special characters to the string
+            passOptions += options.specialChars;
+            //add a random special character to the chosen character array
+            chosenChars.push(SelectRandomChar(options.specialChars));
+        }
+
+        //while the lenght of the chosen characters array is less than the input given by the user
+        while (chosenChars.length < passLenght) {
+            //add a random character from the string created with the selected options
+            chosenChars.push(SelectRandomChar(passOptions));
+        }
+
+        //concatenate all the characters in the chosen chars array to a string
+        for (i = 0; i < chosenChars.length; i++) {
+            newPassword += chosenChars[i];
+        }
+
+        return newPassword;
     }
 
-    if (lowercase) {
-        //add the lowercase options to the string
-        passOptions += options.lowerCase; 
 
-        //insert a random character from the lowecase options to the chosen characters array
-        chosenChars.push(SelectRandomChar(options.lowerCase));
-    }
-
-    if (uppercase) {
-        //add the upper case options to the string
-        passOptions += options.upperCase;
-
-        //insert a random character from the uppercase options to the chosen characters array
-        chosenChars.push(SelectRandomChar(options.upperCase));
-    }
-
-    if (numbers) {
-        //add the numbers options to the string
-        passOptions += options.numbers;
-
-        //insert a random number to the chosen characters array
-        chosenChars.push(SelectRandomChar(options.numbers));
-    }
-
-    if (specialChars) {
-        //add the special characters to the string
-        passOptions += options.specialChars;
-
-        //add a random special character to the chosen character array
-        chosenChars.push(SelectRandomChar(options.specialChars));
-    }
-
-    //while the lenght of the chosen characters array is less than the input given by the user
-    while (chosenChars.length < passLenght) {
-        //add a random character from the string created with the selected options
-        chosenChars.push(SelectRandomChar(passOptions));
-    }
-
-    //concatenate all the characters in the chosen chars array to a string
-    for (i = 0; i < chosenChars.length; i++) {
-        newPassword += chosenChars[i];
-    }
-
-    return newPassword;
 }
 
 function SelectRandomChar(chars) {
